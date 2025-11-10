@@ -1,0 +1,82 @@
+:root {
+  --ruby: #c91b28;
+  --weiss: #e0e4f1;
+  --blake: #2a2438;
+  --yang: #f5b400;
+  --neutral: #1a1a1a;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: var(--weiss);
+  color: var(--neutral);
+  margin: 0;
+}
+
+/* === PRODUCTOS === */
+#productos-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  justify-content: center;
+  padding: 2rem;
+}
+
+/* === TARJETAS === */
+.card {
+  border: none;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #fff;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.card-img-top {
+  object-fit: contain;
+  height: 220px;
+  background-color: #fafafa;
+  padding: 10px;
+}
+
+.card-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  min-height: 48px;
+}
+
+.card-text {
+  color: var(--ruby);
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: var(--ruby);
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--yang);
+  color: var(--neutral);
+}
+
+/* === MODAL === */
+#cart-items {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+#cart-total {
+  color: var(--ruby);
+  font-weight: bold;
+}
+
+/* === FOOTER === */
+footer {
+  background-color: var(--blake);
+  color: var(--weiss);
+}

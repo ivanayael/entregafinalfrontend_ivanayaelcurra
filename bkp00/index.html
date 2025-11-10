@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <meta name="description" content="Tienda demo con carrito, contacto y productos desde API">
+    <title>Tienda Demo</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+   <header>
+        <div class="container header-inner">
+            <h1>Tienda Demo</h1>
+            <nav>
+                <ul class="nav-list">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#productos">Productos</a></li>
+                <li><a href="#reseñas">Reseñas</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+            <div class="cart">
+                <button id="cart-btn" aria-label="Abrir carrito">Carrito (<span id="cart-count">0</span>)</button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <section id="inicio" class="hero">
+            <div class="container">
+                <h2>Bienvenido</h2>
+                <p>Catálogo de productos consumidos desde una API y carrito persistente.</p>
+            </div>
+        </section>
+
+        <section id="productos" class="productos container">
+            <h2>Productos</h2>
+            <div id="productos-list" class="productos-list"></div>
+        </section>
+
+
+        <section id="reseñas" class="reseñas container">
+        <h2>Reseñas</h2>
+            <div class="grid-reviews">
+                <article class="review"> <h3>Usuario A</h3><p>Excelente atención y calidad.</p></article>
+                <article class="review"> <h3>Usuario B</h3><p>Entrega rápida y producto conforme.</p></article>
+                <article class="review"> <h3>Usuario C</h3><p>Recomendado, buen precio.</p></article>
+                <article class="review"> <h3>Usuario D</h3><p>Volvería a comprar.</p></article>
+            </div>
+        </section>
+
+
+        <section id="contacto" class="contacto container">
+            <h2>Contacto</h2>
+            <form id="contact-form" action="https://formspree.io/f/your-form-id" method="POST">
+                <label for="name">Nombre</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Correo</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Mensaje</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <button type="submit">Enviar</button>
+            </form>
+        </section>
+
+
+        <section id="cart-modal" class="cart-modal" aria-hidden="true">
+            <div class="cart-content">
+                <button id="close-cart">Cerrar</button>
+                <h3>Carrito</h3>
+                <ul id="cart-items"></ul>
+                    <div class="cart-summary">
+                        <p>Total: $<span id="cart-total">0.00</span></p>
+                        <button id="checkout">Simular Compra</button>
+                    </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="container">
+            <p>&copy; 2025 Tienda Demo</p>
+            </div>
+        </footer>
+
+        <script src="script.js" defer></script>
+</body>
+</html>
