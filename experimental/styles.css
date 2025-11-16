@@ -1,0 +1,106 @@
+:root{
+  --ruby:#c91b28; --weiss:#e9eef8; --blake:#2a2438; --yang:#f5b400; --neutral:#1a1a1a;
+  --card-bg:#fff; --muted:#6c757d;
+}
+
+/* body + themes base */
+body { font-family: "Poppins", system-ui, -apple-system, sans-serif; margin:0; background:var(--weiss); color:var(--neutral); transition:background .45s,color .45s; }
+
+/* Theme classes (dynamic) */
+.theme-ruby { --theme-bg:#fff6f6; --theme-primary:var(--ruby); --theme-accent:var(--yang); --theme-text:#1a1a1a; }
+.theme-weiss{ --theme-bg:#f6f9ff; --theme-primary:#6f8fd6; --theme-accent:#ffffff; --theme-text:#1d2433; }
+.theme-blake{ --theme-bg:#1e1b26; --theme-primary:#4b4b7c; --theme-accent:#ffffff; --theme-text:#efefef; }
+.theme-yang{ --theme-bg:#fff8e6; --theme-primary:var(--yang); --theme-accent:#2b2b2b; --theme-text:#2b2b2b; }
+
+/* apply theme tokens */
+body { background: var(--theme-bg, var(--weiss)); color: var(--theme-text, var(--neutral)); }
+header, footer { transition: background .45s, color .45s; }
+
+/* header minimal */
+#site-header { background: transparent; }
+.text-rwby{ color:var(--theme-primary); font-weight:700; letter-spacing:.4px; }
+
+/* controls */
+.form-select, .form-control { min-height:38px; }
+
+/* products grid */
+.products-grid {
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap:1.25rem;
+  align-items:start;
+}
+
+/* responsive columns */
+@media (max-width:1200px){ .products-grid{ grid-template-columns: repeat(3, 1fr); } }
+@media (max-width:900px){ .products-grid{ grid-template-columns: repeat(2, 1fr); } }
+@media (max-width:576px){ .products-grid{ grid-template-columns: 1fr; } }
+
+/* card */
+.product-card{
+  width:100%;
+  max-width:320px;
+  margin:0 auto;
+  background:var(--card-bg);
+  border-radius:12px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  min-height:420px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.08);
+  transition:transform .25s,box-shadow .25s;
+  border:2px solid rgba(0,0,0,0.04);
+}
+.product-card:hover{ transform:translateY(-6px); box-shadow:0 12px 30px rgba(0,0,0,0.12); }
+
+/* image area */
+.product-img{
+  width:100%;
+  height:220px;
+  object-fit:contain;
+  background:#fafafa;
+  display:block;
+  transition:transform .35s ease,filter .35s,box-shadow .35s;
+}
+
+/* image fx classes; use together on img */
+.img-zoom:hover{ transform:scale(1.08); }
+.img-glow:hover{ box-shadow:0 0 18px rgba(245,180,0,0.25); }
+.img-grey{ filter:grayscale(100%); }
+.img-grey:hover{ filter:grayscale(0%); }
+
+/* card content */
+.card-body { padding:1rem; display:flex; flex-direction:column; gap:.5rem; flex:1 1 auto; }
+.card-title{ font-size:1rem; font-weight:600; min-height:48px; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; }
+.card-price{ color:var(--theme-primary); font-weight:700; font-size:1.05rem; }
+.card-actions{ margin-top:auto; }
+
+/* stars */
+.stars{ color:var(--yang); font-size:1.05rem; }
+
+/* buttons */
+.btn-ruby{ background:var(--ruby); color:#fff; border:none; padding:.45rem .65rem; border-radius:.35rem; }
+.btn-primary { background:var(--theme-primary); border:none; color:var(--theme-accent); }
+
+/* loader */
+#loader{ padding:3rem 0; }
+
+/* fade-in animation (stagger) */
+.fade-in { opacity:0; transform:translateY(18px); animation:fadeUp .55s forwards; }
+@keyframes fadeUp { to { opacity:1; transform:none; } }
+
+/* cart badge */
+#cart-count{ background:var(--theme-accent); color:var(--theme-text); padding:.25rem .5rem; border-radius:999px; font-weight:600; }
+
+/* modal adjustments */
+.modal-content{ border-radius:10px; }
+.list-group-item { display:flex; justify-content:space-between; align-items:center; gap:.5rem; }
+
+/* card theme borders (per theme) */
+.theme-ruby .product-card{ border-color: rgba(201,27,40,0.18); }
+.theme-weiss .product-card{ border-color: rgba(111,143,214,0.12); }
+.theme-blake .product-card{ border-color: rgba(75,75,124,0.12); background:#201e27; color:#eaeaea; }
+.theme-yang .product-card{ border-color: rgba(245,180,0,0.18); }
+
+/* ensure images accessible */
+.product-img[alt=""]{ outline: 2px dashed rgba(0,0,0,0.05); }
