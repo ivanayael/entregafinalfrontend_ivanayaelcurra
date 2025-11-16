@@ -30,20 +30,29 @@
     </div>
 
     <button type="submit" class="btn btn-danger w-100 mt-3">Ingresar</button>
+
+    <p class="text-center mt-3">
+      ¿No tienes cuenta? 
+      <a href="register.html" class="text-decoration-none">Registrarme</a>
+    </p>
+
   </form>
 
 </section>
 
 <footer class="footer text-center py-3">
-  <p>&copy; 2025 RWBY Shop. Creado por <a href="https://github.com/ivanayael">Ivana Yael Curra</a></p>
+  <p>&copy; 2025 RWBY Shop. Creado por 
+     <a href="https://github.com/ivanayael">Ivana Yael Curra</a>
+  </p>
 </footer>
 
 <script src="login.js"></script>
 
-</body>
 <script>
   if (localStorage.getItem("usuario_logueado")) {
     window.location.href = "index.html";
   }
 </script>
+
+</body>
 </html>

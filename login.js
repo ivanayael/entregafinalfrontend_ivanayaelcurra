@@ -1,8 +1,14 @@
-// Simulación de base de datos
-const usuarios = [
+// Usuarios base + usuarios registrados
+const usuariosBase = [
   { usuario: "ivana", clave: "12345" },
   { usuario: "admin", clave: "admin" }
 ];
+
+// Cargar usuarios registrados en localStorage
+let usuariosExtra = JSON.parse(localStorage.getItem("usuarios_db")) || [];
+
+// Unir ambas listas
+const usuarios = [...usuariosBase, ...usuariosExtra];
 
 const form = document.getElementById("login-form");
 
