@@ -150,3 +150,25 @@ body {
 }
 
 
+.landing-container {
+  padding: 3rem 1rem;
+}
+
+.landing-img {
+  width: 280px;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.login-form {
+  max-width: 400px;
+}
+
+iframe {
+  border-radius: 10px;
+  max-width: 100%;
+}
