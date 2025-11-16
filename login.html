@@ -41,4 +41,9 @@
 <script src="login.js"></script>
 
 </body>
+<script>
+  if (localStorage.getItem("usuario_logueado")) {
+    window.location.href = "index.html";
+  }
+</script>
 </html>

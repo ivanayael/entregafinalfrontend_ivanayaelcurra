@@ -179,3 +179,11 @@ document.addEventListener("DOMContentLoaded", () => {
     img.classList.add("loaded");
   });
 });
+
+const logoutBtn = document.getElementById("logout-btn");
+if (logoutBtn) {
+  logoutBtn.onclick = () => {
+    localStorage.removeItem("usuario_logueado");
+    window.location.href = "login.html";
+  };
+}
