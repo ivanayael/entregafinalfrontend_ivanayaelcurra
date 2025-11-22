@@ -1,40 +1,54 @@
-const API_URL = "https://fakestoreapi.com/products";
+const API_URL = "https://fakestoreapi.com/products"; // URL de la API
+
+// Variable global para productos
 let allProducts = [];
 
-const productsList = document.getElementById("productos-list");
-const cartCount = document.getElementById("cart-count");
-const cartItemsContainer = document.getElementById("cart-items");
-const cartTotal = document.getElementById("cart-total");
-const checkoutBtn = document.getElementById("checkout");
+// Elementos del DOM
+const productsList = document.getElementById("productos-list"); // Contenedor de productos
+const cartCount = document.getElementById("cart-count"); // Contador del carrito
+const cartItemsContainer = document.getElementById("cart-items"); // Contenedor de items del carrito
+const cartTotal = document.getElementById("cart-total"); // Total del carrito
+const checkoutBtn = document.getElementById("checkout"); // Botón de checkout
 
-const searchInput = document.getElementById("search-input");
-const categoryFilter = document.getElementById("category-filter");
+const searchInput = document.getElementById("search-input"); // Input de búsqueda
+const categoryFilter = document.getElementById("category-filter"); // Select de categorías
 
-let cart = JSON.parse(localStorage.getItem("cart_v1")) || {};
+// Carrito almacenado en localStorage
+
+let cart = JSON.parse(localStorage.getItem("cart_v1")) || {}; 
 
 // Carrito
 function saveCart() {
-  localStorage.setItem("cart_v1", JSON.stringify(cart));
-  updateCartUI();
+  localStorage.setItem("cart_v1", JSON.stringify(cart)); // Guardar en localStorage
+  updateCartUI(); // Actualizar UI
 }
 
 function updateCartUI() {
-  const totalCount = Object.values(cart).reduce((s, i) => s + i.quantity, 0);
-  cartCount.textContent = totalCount;
-  renderCartItems();
+  const totalCount = Object.values(cart).reduce((s, i) => s + i.quantity, 0); // Sumar cantidades
+  cartCount.textContent = totalCount; // Actualizar contador
+  renderCartItems(); // Renderizar items
 }
 
+// Renderizar items del carrito
 function renderCartItems() {
   cartItemsContainer.innerHTML = "";
   let total = 0;
 
   for (const id in cart) {
+
+    // Obtener item
     const item = cart[id];
+
+    // Calcular total
     total += item.price * item.quantity;
 
+    // Crear fila
     const row = document.createElement("div");
+
+    // Clases CSS
     row.className = "d-flex justify-content-between align-items-center border-bottom py-2";
 
+    // Contenido de la fila
     row.innerHTML = `
       <div>
         <strong>${item.title}</strong>
@@ -47,48 +61,51 @@ function renderCartItems() {
 
         <button class="btn btn-danger btn-sm remove-btn" data-id="${id}">X</button>
       </div>
-    `;
+    `; // Contenido de la fila
     cartItemsContainer.appendChild(row);
   }
 
+  // Actualizar total
   cartTotal.textContent = `$${total.toFixed(2)}`;
   attachCartListeners();
 }
 
-function attachCartListeners() {
-  document.querySelectorAll(".remove-btn").forEach(btn => {
-    btn.onclick = () => {
-      delete cart[btn.dataset.id];
-      saveCart();
+function attachCartListeners() { // Eventos del carrito
+  document.querySelectorAll(".remove-btn").forEach(btn => { // Botones eliminar
+    btn.onclick = () => { // Al hacer clic en eliminar
+      delete cart[btn.dataset.id]; // Eliminar del carrito
+      saveCart(); // Guardar cambios
     };
   });
 
-  document.querySelectorAll(".qty-input").forEach(input => {
+  document.querySelectorAll(".qty-input").forEach(input => { // Cantidad
     input.onchange = () => {
-      const id = input.dataset.id;
-      cart[id].quantity = parseInt(input.value) || 1;
-      saveCart();
+      const id = input.dataset.id; // Obtener ID
+      cart[id].quantity = parseInt(input.value) || 1; // Validar cantidad
+      saveCart(); // Guardar cambios
     };
   });
 }
 
-function addToCart(product) {
-  if (cart[product.id]) {
-    cart[product.id].quantity += 1;
+function addToCart(product) { // Agregar al carrito
+  if (cart[product.id]) { 
+    cart[product.id].quantity += 1; // Incrementar cantidad
   } else {
-    cart[product.id] = { ...product, quantity: 1 };
+    cart[product.id] = { ...product, quantity: 1 }; // Clonar objeto y agregar cantidad
   }
-  saveCart();
+  saveCart(); // Guardar cambios
 }
 
 // Renderizado
 function renderProducts(products) {
-  productsList.innerHTML = "";
+  productsList.innerHTML = ""; // Limpiar contenedor
   products.forEach(p => {
-    const card = document.createElement("div");
-    card.className = "card h-100 shadow-sm fade-in";
+    const card = document.createElement("div"); // Crear tarjeta
+    card.className = "card h-100 shadow-sm fade-in"; // Clases CSS
     card.tabIndex = 0;
-
+    
+    // Contenido de la tarjeta
+    
     card.innerHTML = `
       <img src="${p.image}" class="card-img-top img-fade" alt="${p.title}">
       <div class="card-body d-flex flex-column">
@@ -100,73 +117,95 @@ function renderProducts(products) {
         </button>
       </div>
     `;
-    productsList.appendChild(card);
+    productsList.appendChild(card); // Agregar tarjeta al contenedor
   });
 
-  document.querySelectorAll(".add-btn").forEach(btn => {
-    btn.onclick = () => {
-      const prod = allProducts.find(p => p.id == btn.dataset.id);
-      addToCart(prod);
+  document.querySelectorAll(".add-btn").forEach(btn => { // Botones "Agregar al carrito"
+    btn.onclick = () => { // Al hacer clic en "Agregar al carrito"
+      const prod = allProducts.find(p => p.id == btn.dataset.id); // Buscar producto
+      addToCart(prod); // Agregar al carrito
     };
   });
 }
 
 // Filtros
 function applyFilters() {
-  const search = searchInput.value.toLowerCase();
-  const category = categoryFilter.value;
+  const search = searchInput.value.toLowerCase(); // texto de búsqueda
+  const category = categoryFilter.value; // categoría seleccionada
 
-  let filtered = allProducts.filter(p =>
-    p.title.toLowerCase().includes(search)
+  // Filtrar por búsqueda
+  let filtered = allProducts.filter(p => 
+    p.title.toLowerCase().includes(search) // Buscar por título
   );
 
-  if (category !== "all") {
+
+  // Filtrar por categoría
+  if (category !== "all") { // Todas las categorías
     filtered = filtered.filter(p => p.category === category);
   }
-
+  // Renderizar productos filtrados
   renderProducts(filtered);
 }
-
+// Búsqueda
 searchInput.addEventListener("input", applyFilters);
+// Cambio de categoría
 categoryFilter.addEventListener("change", applyFilters);
 
 // Categorías
 async function loadCategories() {
+  // Obtener categorías desde API
   const res = await fetch(`${API_URL}/categories`);
+  // Llenar el select
   const categories = await res.json();
-  categories.forEach(cat => {
+
+  // Otras categorías
+  categories.forEach(cat => { 
+    // Crear opción
     const opt = document.createElement("option");
+    // Asignar valores
     opt.value = cat;
+    // Texto en mayúsculas
     opt.textContent = cat.toUpperCase();
+    // Agregar al select
     categoryFilter.appendChild(opt);
   });
 }
 
 // Productos
 async function fetchProducts() {
+  // Obtener productos desde API
   const res = await fetch(API_URL);
+  // Guardar en variable global
   allProducts = await res.json();
+  // Renderizar productos
   renderProducts(allProducts);
 }
 
 // Checkout
 checkoutBtn.onclick = () => {
-  alert("Compra simulada.");
+   // Simulación de compra
+  alert("Compra simulada. ¡Gracias por su compra! 😊");
+  // Vaciar carrito
   cart = {};
+  // Guardar cambios
   saveCart();
 };
 
-// Tema RWBY
+// Tema Seasons
 const themeSelector = document.getElementById("theme-selector");
-const currentTheme = localStorage.getItem("rwby_theme") || "ruby";
 
+// Tema guardado
+const currentTheme = localStorage.getItem("seasons_theme") || "spring";
+
+// Aplicar tema guardado
 document.body.classList.add(`theme-${currentTheme}`);
 themeSelector.value = currentTheme;
 
+// Cambio de tema
 themeSelector.onchange = () => {
   document.body.className = "";
   document.body.classList.add(`theme-${themeSelector.value}`);
-  localStorage.setItem("rwby_theme", themeSelector.value);
+  localStorage.setItem("seasons_theme", themeSelector.value);
 };
 
 // Inicialización

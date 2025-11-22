@@ -1,37 +1,37 @@
 :root {
-  --ruby: #c91b28;
-  --weiss: #e0e4f1;
-  --blake: #2a2438;
-  --yang: #f5b400;
+  --spring: #f5a4a6;
+  --winter: #2a4bb8;
+  --autumn: #b65721;
+  --summer: #f5b400;
   --neutral: #1a1a1a;
 }
 
 /* Temas */
-.theme-ruby {
+.theme-spring {
   --theme-bg: #fff0f0;
-  --theme-primary: #c91b28;
-  --theme-accent: #f5b400;
+  --theme-primary: #f5a4a6;
+  --theme-accent: #9c1c1f;
   --theme-text: #1a1a1a;
 }
 
-.theme-weiss {
+.theme-winter {
   --theme-bg: #f8f9ff;
   --theme-primary: #b0c4ff;
   --theme-accent: #ffffff;
   --theme-text: #222;
 }
 
-.theme-blake {
+.theme-autumn {
   --theme-bg: #1e1e2f;
   --theme-primary: #4b4b7c;
-  --theme-accent: #ffffff;
-  --theme-text: #f5f5f5;
+  --theme-accent: #a74545;
+  --theme-text: #d14e2d;
 }
 
-.theme-yang {
+.theme-summer {
   --theme-bg: #fff7e6;
   --theme-primary: #f5b400;
-  --theme-accent: #7a3700;
+  --theme-accent: #ce5f15;
   --theme-text: #2b2b2b;
 }
 
@@ -39,7 +39,10 @@ body {
   background-color: var(--theme-bg);
   color: var(--theme-text);
   transition: 0.6s ease;
-  font-family: "Poppins", sans-serif;
+  font-family: "Besley", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
 }
 
 
@@ -212,4 +215,13 @@ iframe {
   opacity: 0.9;
 }
 
-/* landing image and sizes (already in styles.css earlier) */
+#play-music:hover{
+  opacity: 1;
+}
+
+.besley {
+  font-family: "Besley", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
