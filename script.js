@@ -213,12 +213,14 @@ updateCartUI();
 loadCategories();
 fetchProducts();
 
+// Efecto fade-in para imágenes
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".img-fade").forEach(img => {
     img.classList.add("loaded");
   });
 });
 
+// Logout
 const logoutBtn = document.getElementById("logout-btn");
 if (logoutBtn) {
   logoutBtn.onclick = () => {
