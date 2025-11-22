@@ -170,7 +170,9 @@ Ambos enlaces pueden subirse al Campus Virtual según la consigna.
 
 ### 11. Créditos y Agradecimientos
 
-Talento Tech – Argentina
+Talento Tech – Argentina -> Por la enseñanza y la dedicación
+
+CLAMP :D  – Inspiración visual y temática.
 
 RWBY (Rooster Teeth) – Inspiración visual y temática.
 
