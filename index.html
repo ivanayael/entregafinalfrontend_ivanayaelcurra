@@ -4,174 +4,184 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Tienda Seasons Shop</title>
+  <title>Tienda Seasons Shop</title> <!-- Título del sitio web -->
 
-  <!-- SEO Meta Tags -->
+  <!-- Metadatos SEO -->
   <meta name="description" content="Tienda Seasons con productos, reseñas, carrito dinámico y consumo de API REST.">
+  <meta name="keywords" content="tienda, seasons, shop, productos, compras, ecommerce"> <!-- Palabras clave para motores de búsqueda -->
+  <meta name="author" content="Ivana Yael Curra"> <!-- Autor del sitio web -->
 
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-  <link href="styles.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> <!-- Biblioteca Bootstrap para estilos y componentes -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"> <!-- Iconos de Bootstrap -->
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Precarga de Google Fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- Precarga de Google Fonts con crossorigin -->
   <link href="https://fonts.googleapis.com/css2?family=Besley:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
-
+  <!-- Tipografía principal del sitio -->
+  <link href="css/styles.css" rel="stylesheet">
+  <!-- Hoja de estilos personalizada -->
+  <script defer>
+    if (!localStorage.getItem("usuario_logueado")) {
+      window.location.href = "landing.html";
+    }
+  </script>
 </head>
 
-<body>
-<script>
-  // Redirigir si no está logueado
-  if (!localStorage.getItem("usuario_logueado")) {
-    window.location.href = "landing.html";
-  }
-</script>
-<header class="header shadow sticky-top"> <!-- Agregado sticky-top para que el header quede fijo -->
-  <div class="container d-flex flex-wrap justify-content-between align-items-center"> <!-- Usar flexbox para distribuir los elementos -->
-    <img src="img/SEASONAL_SHOP.png" class="img-zoom logo-img" alt="Seasonal Shop Logo"> <!-- Logo a la izquierda -->
-    <nav>
-      <ul class="nav"> <!-- Usar clase nav de Bootstrap -->
+<body class="besley"> <!-- Clase para manejo de temas visuales -->
+<header class="header shadow sticky-top"> <!-- Encabezado con sombra y posición fija en la parte superior -->
+  <div class="container d-flex flex-wrap justify-content-between align-items-center"> <!-- Contenedor flexible para distribuir elementos -->
 
-        <li class="nav-item"><a class="nav-link text-light" href="landing.html">Inicio</a></li> <!-- Enlace a landing.html -->
-        <li class="nav-item"><a class="nav-link text-light" href="login.html">Login</a></li> <!-- Enlace a login.html -->
-        <li class="nav-item"><a class="nav-link text-light" href="#productos">Productos</a></li> <!-- Enlace a sección productos -->
-        <li class="nav-item"><a class="nav-link text-light" href="#reseñas">Reseñas</a></li> <!-- Enlace a sección reseñas -->
-        <li class="nav-item"><a class="nav-link text-light" href="#contacto">Contacto</a></li>  <!-- Enlace a sección contacto -->
-        <li class="nav-item"><a class="nav-link text-light" href="gracias.html">Agradecimientos</a></li> <!-- Enlace a gracias.html -->
-        <!-- <li class="nav-item"><a class="nav-link text-light" href="#inicio">Inicio</a></li>  
-        <li class="nav-item"><a class="nav-link text-light" href="#productos">Productos</a></li> -->
+    <img src="img/SEASONAL_SHOP.png" class="img-zoom logo-img" alt="Logo de Seasonal Shop"> <!-- Logotipo del sitio -->
+
+    <nav aria-label="Navegación principal"> <!-- Navegación principal con etiqueta aria -->
+      <ul class="nav">
+        <li class="nav-item"><a class="nav-link text-light" href="landing.html">Inicio</a></li> <!-- Enlace a la página de inicio -->
+        <li class="nav-item"><a class="nav-link text-light" href="login.html">Login</a></li> <!-- Enlace a la página de login -->
+        <li class="nav-item"><a class="nav-link text-light" href="#productos">Productos</a></li> <!-- Enlace a la sección de productos -->
+        <li class="nav-item"><a class="nav-link text-light" href="#reseñas">Reseñas</a></li>
+        <li class="nav-item"><a class="nav-link text-light" href="#contacto">Contacto</a></li>
+        <li class="nav-item"><a class="nav-link text-light" href="gracias.html">Agradecimientos</a></li>
       </ul>
-
     </nav>
 
-    <select id="theme-selector" aria-label="Tema visual"> <!-- Selector de tema -->
-      <option value="spring">Primavera</option> 
-      <option value="winter">Invierno</option>
-      <option value="autumn">Otoño</option>
-      <option value="summer">Verano</option>
-    </select>
+    <div class="d-flex align-items-center gap-3"> <!-- Contenedor para selector de tema, carrito y botón de logout -->
+      <label for="theme-selector" class="visually-hidden">Tema visual</label>
+      <select id="theme-selector" aria-label="Cambiar tema visual">
+        <option value="spring">Primavera</option> <!-- Opciones de temas visuales -->
+        <option value="winter">Invierno</option> <!-- Opciones de temas visuales -->
+        <option value="autumn">Otoño</option> <!-- Opciones de temas visuales -->
+        <option value="summer">Verano</option> <!-- Opciones de temas visuales -->
+      </select>
 
-    <button class="btn btn-danger cart-btn" id="cart-btn" data-bs-toggle="modal" data-bs-target="#cartModal"> <!-- Botón del carrito -->
-      <i class="bi bi-cart3"></i> <!-- Icono del carrito -->
-      <span id="cart-count" class="badge bg-warning text-dark cart-count" aria-live="polite">0</span> <!-- Contador de items en el carrito -->
-    </button>
-    <button id="logout-btn" class="btn btn-secondary ms-3">Salir</button> <!-- Botón de logout -->
+      <!-- Botón del carrito de compras -->
+      <button class="btn btn-danger cart-btn" id="cart-btn" data-bs-toggle="modal" data-bs-target="#cartModal">
+        <i class="bi bi-cart3"></i> <!-- Icono del carrito -->
+        <span id="cart-count" class="badge bg-warning text-dark cart-count">0</span>
+      </button>
+
+      <button id="logout-btn" class="btn btn-secondary">Salir</button>
+    </div>
   </div>
 </header>
 
-<main class="container my-4" id="inicio">
+<main class="container my-4">
 
-  <!-- Búsqueda y filtros -->
-  <section class="filter-section mb-4"> <!-- Nueva sección para filtros -->
-    <div class="row g-3"> <!-- Usar row y g-3 para espacio entre columnas -->
-      <div class="col-md-6"> <!-- Columna para búsqueda -->
-        <input id="search-input" type="text" class="form-control search-input" placeholder="Buscar productos..."> <!-- getItems de búsqueda -->
-      </div> 
-      <div class="col-md-6"> <!-- Columna para filtro de categoría -->
-        <select id="category-filter" class="form-control category-filter" title="Filtrar por categoría" aria-label="Filtrar por categoría"> <!-- Filtro de categoría -->
-          <option value="all">Todas las categorías</option> <!-- Opción por defecto -->
-        </select> <!-- Fin del select -->
+  <section class="filter-section mb-4"> <!-- Sección de filtros y búsqueda -->
+    <div class="row g-3"> <!-- Grid con espacio entre columnas -->
+      <div class="col-md-6"> <!-- Campo de búsqueda -->
+        <input id="search-input" type="text" class="form-control search-input" placeholder="Buscar productos...">
       </div>
-    </div> 
-  </section>
-
-  <!-- Productos -->
-  <section id="productos" class="mb-5"> <!-- Sección de productos -->
-    <h2 class="text-center mb-4">Productos Destacados</h2>  <!-- Título de la sección -->
-    <div id="productos-list" class="product-grid"></div> <!-- Contenedor de productos -->
-  </section>
-
-  <!-- Reseñas -->
-  <section id="reseñas" class="mb-5"> <!-- Sección de reseñas -->
-    <h2 class="text-center mb-4">Reseñas</h2> <!-- Título de la sección -->
-
-    <div class="row g-4"> <!-- Usar row y g-4 para espacio entre columnas -->
-      <div class="col-md-4"> <!-- Columna para cada reseña -->
-        <div class="card review-card p-3 fade-in"> <!-- Tarjeta de reseña -->
-          <h5 class="card-title">Ruby Rose</h5>
-          <div class="stars">★★★☆☆</div>
-          <p>Excelente calidad y entrega rápida.</p>
-        </div>
-      </div>
-
-      <div class="col-md-4"> <!-- Columna para cada reseña -->
-        <div class="card review-card p-3 fade-in"> <!-- Tarjeta de reseña -->
-          <h5 class="card-title">Weiss Schnee</h5>
-          <div class="stars">★★★☆☆</div>
-          <p>El diseño es elegante y moderno.</p>
-        </div>
-      </div>
-
-      <div class="col-md-4"> <!-- Columna para cada reseña -->
-        <div class="card review-card p-3 fade-in"> <!-- Tarjeta de reseña -->
-          <h5 class="card-title">Blake Belladonna</h5>
-          <div class="stars">★★★☆☆</div>
-          <p>El servicio fue cordial. Buena atención</p>
-        </div>
-      </div>
-
-       <div class="col-md-4"> <!-- Columna para cada reseña -->
-        <div class="card review-card p-3 fade-in"> <!-- Tarjeta de reseña -->
-          <h5 class="card-title">Yang Xiao Long</h5> 
-          <div class="stars">★★★☆☆</div>
-          <p>Me gusta el nuevo diseño. Mucho mejor que el anterior</p>
-        </div>
+      <div class="col-md-6"> <!-- Filtro por categoría -->
+        <label for="category-filter" class="visually-hidden">Filtrar por categoría</label> <!-- Etiqueta oculta para accesibilidad -->
+        <select id="category-filter" class="form-control category-filter" aria-label="Filtrar por categoría" title="Filtrar por categoría">
+          <option value="all">Todas las categorías</option>
+        </select>
       </div>
     </div>
   </section>
 
-  <!-- Contacto -->
+  <section id="productos" class="mb-5"> <!-- Sección de productos -->
+    <h2 class="text-center mb-4">Productos Destacados</h2> <!-- Título de la sección -->
+    <div id="productos-list" class="product-grid"></div> <!-- Contenedor dinámico para los productos -->
+  </section>
+
+  <section id="reseñas" class="mb-5"> <!-- Sección de reseñas -->
+    <h2 class="text-center mb-4">Reseñas</h2> <!-- Título de la sección -->
+    <div class="row g-4"> <!-- Grid para las tarjetas de reseñas -->
+      <article class="col-md-4">
+        <div class="card review-card p-3 fade-in"> <!-- Tarjeta de reseña con animación de aparición -->
+          <h3>Ruby Rose</h3><p>★★★☆☆</p>
+          <p>Excelente calidad y entrega rápida.</p>
+        </div>
+      </article>
+
+      <article class="col-md-4">
+        <div class="card review-card p-3 fade-in"> <!-- Tarjeta de reseña con animación de aparición -->
+          <h3>Weiss Schnee</h3><p>★★★☆☆</p>
+          <p>El diseño es elegante y moderno.</p>
+        </div>
+      </article>
+
+      <article class="col-md-4">
+        <div class="card review-card p-3 fade-in"> <!-- Tarjeta de reseña con animación de aparición -->
+          <h3>Blake Belladonna</h3>
+          <p>★★★☆☆</p>
+          <p>El servicio fue cordial. Buena atención.</p>
+        </div>
+      </article>
+
+      <article class="col-md-4">
+        <div class="card review-card p-3 fade-in"> <!-- Tarjeta de reseña con animación de aparición -->
+          <h3>Yang Xiao Long</h3>
+          <p>★★★☆☆</p>
+          <p>El nuevo diseño es superior a la versión anterior.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
   <section id="contacto" class="mb-5"> <!-- Sección de contacto -->
-    <h2 class="text-center mb-4">Contacto</h2> <!-- Título de la sección -->
+    <h2 class="text-center mb-4">Contacto</h2> 
+
     <form id="contact-form" action="https://formspree.io/f/xeorepkn" method="POST" class="contact-form"> <!-- Formulario de contacto -->
-      <div class="mb-3"> <!-- Grupo de formulario -->
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="nombre" class="form-control" required>
-      </div>
+      <label>Nombre</label>
+      <input type="text" id="nombre" name="nombre" class="form-control mb-3" required placeholder="Ingrese su nombre" title="Ingrese su nombre"> <!-- Campo de nombre -->
 
-      <div class="mb-3"> <!-- Grupo de formulario -->
-        <label for="email">Correo Electrónico</label> <!-- Correo electrónico -->
-        <input type="email" id="email" name="_replyto" class="form-control" required> <!-- Campo de email -->
-      </div>
+      <label for="email">Correo Electrónico</label>
+      <input type="email" id="email" name="_replyto" class="form-control mb-3" placeholder="Ingrese su correo electrónico" title="Ingrese su correo electrónico" required aria-required="true"> <!-- Campo de correo electrónico -->
 
-      <div class="mb-3"> <!-- Grupo de formulario -->
-        <label for="mensaje">Mensaje</label> <!-- Mensaje -->
-        <textarea id="mensaje" name="mensaje" rows="4" class="form-control" required></textarea> <!-- Área de texto -->
-      </div>
+      <label for="mensaje">Mensaje</label>
+      <textarea id="mensaje" name="mensaje" rows="4" class="form-control mb-3" placeholder="Ingrese su mensaje" title="Ingrese su mensaje" required></textarea> <!-- Campo de mensaje -->
 
-      <button type="submit" class="btn btn-danger w-100">Enviar</button>
+      <button type="submit" class="btn btn-danger w-100">Enviar</button> <!-- Botón de envío del formulario -->
     </form>
   </section>
+
 </main>
 
-<footer class="footer text-center py-3"> <!-- Footer centrado -->
+<footer class="footer text-center py-3"> <!-- Pie de página con créditos -->
   <p class="m-0">&copy; 2025 Seasonal Shop. Creado por <a href="https://github.com/ivanayael">Ivana Yael Curra</a></p>
 </footer>
 
-<!-- Modal Carrito -->
-<div class="modal fade" id="cartModal" tabindex="-1">
-  <div class="modal-dialog modal-lg modal-dialog-scrollable"> <!-- Modal grande y desplazable -->
-    <div class="modal-content modal-cart"> <!-- Contenido del modal -->
-      <div class="modal-header border-danger"> <!-- Encabezado del modal -->
-        <h5 class="modal-title text-seasons">Carrito de Compras</h5> <!-- Título del modal -->
-        <button type="button" class="btn-close btn-close-white" title="cerrar" data-bs-dismiss="modal"></button>
-      </div>
-
-      <div class="modal-body"> <!-- Cuerpo del modal -->
+<div class="modal fade" id="cartModal" tabindex="-1"> <!-- Modal del carrito de compras -->
+  <div class="modal-dialog modal-lg modal-dialog-scrollable"> <!-- Diálogo modal grande y desplazable -->
+    <div class="modal-content modal-cart"> <!-- Contenido del modal con estilo personalizado -->
+      <div class="modal-header border-danger"> <!-- Encabezado del modal con borde rojo -->
+        <h5 class="modal-title">Carrito de Compras</h5> <!-- Título del modal -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar" title="Cerrar"></button>
+      </div> <!-- Cuerpo del modal con lista de artículos -->
+      <div class="modal-body">  <!-- Cuerpo del modal con lista de artículos -->
         <ul id="cart-items" class="list-group list-group-flush"></ul>
-      </div>
-
-      <div class="modal-footer border-danger d-flex justify-content-between"> <!-- Pie del modal -->
+      </div> <!-- Pie del modal con total y botón de finalizar compra -->
+      <div class="modal-footer border-danger d-flex justify-content-between">
         <h5>Total: <span id="cart-total">$0.00</span></h5> <!-- Total del carrito -->
         <button id="checkout" class="btn btn-danger">Finalizar Compra</button> <!-- Botón de finalizar compra -->
       </div>
-
     </div>
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!-- Bootstrap JS Bundle -->
-<script src="script.js"></script> <!-- Script principal -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> <!-- Biblioteca Bootstrap JS -->
+<script src="js/script.js"></script> <!-- Archivo JavaScript principal -->
+
+<!-- Activación automática del tema -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => { 
+    const selector = document.getElementById("theme-selector"); // Selector de tema visual 
+    const body = document.body; // Elemento body del documento
+
+    const temaGuardado = localStorage.getItem("tema_estacional") || "spring"; // Obtener tema guardado o usar "spring" por defecto
+
+    body.classList.add("theme-" + temaGuardado); // Aplicar clase de tema al body
+    selector.value = temaGuardado; // Establecer valor del selector al tema guardado
+
+    selector.addEventListener("change", () => { // Evento al cambiar el selector
+      body.classList.remove("theme-spring", "theme-winter", "theme-autumn", "theme-summer"); // Remover clases de temas anteriores
+      body.classList.add("theme-" + selector.value); // Agregar clase del nuevo tema seleccionado
+      localStorage.setItem("tema_estacional", selector.value); // Guardar tema seleccionado en localStorage
+    });
+  });
+</script>
+
 </body>
 </html>

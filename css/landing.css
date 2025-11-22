@@ -1,0 +1,106 @@
+/* Fuente general */
+body {
+  font-family: "Besley", serif; /* Tipografía principal aplicada a todo el sitio */
+  background-color: #fafafa;   /* Fondo gris claro para mejorar la lectura */
+  margin: 0;                   /* Se eliminan márgenes por defecto */
+  padding: 0;                  /* Se elimina padding por defecto */
+}
+
+/* Encabezado */
+.header {
+  background: #ffffff;        /* Fondo blanco para el encabezado */
+  border-bottom: 1px solid #ddd; /* Línea inferior para separar del contenido */
+}
+
+.text-seasons {
+  font-size: 2.5rem;          /* Tamaño de texto grande para destacar el título */
+  font-weight: 700;           /* Texto en negrita */
+  text-transform: uppercase;  /* Texto convertido a mayúsculas */
+}
+
+/* Contenedor principal */
+.landing-container {
+  max-width: 800px;           /* Ancho máximo para centrar y mejorar la lectura */
+  margin: auto;               /* Centrado horizontal automático */
+  padding: 2rem;              /* Espaciado interno amplio */
+}
+
+/* Imagen */
+.landing-img {
+  width: 60%;                 /* La imagen ocupa el 60% del contenedor */
+  max-width: 350px;           /* Tamaño máximo para evitar escalado excesivo */
+  transition: transform 0.3s ease; /* Suaviza animación de zoom */
+}
+
+.img-zoom:hover {
+  transform: scale(1.05);     /* Efecto de zoom al pasar el cursor */
+}
+
+/* Video */
+.video-container {
+  display: flex;              /* Uso de flexbox para centrado */
+  justify-content: center;    /* Centrado horizontal del video */
+}
+
+/* Botón */
+.btn-lg {
+  padding: 0.8rem 2rem;       /* Espaciado interno amplio */
+  font-size: 1.2rem;          /* Texto ligeramente más grande */
+  background-color: #007bff;  /* Azul estándar estilo Bootstrap */
+  color: #fff;                /* Texto blanco */
+  border: none;               /* Se quita borde predeterminado */
+  border-radius: 5px;         /* Bordes redondeados */
+  cursor: pointer;            /* Indica que es interactivo */
+  transition: background-color 0.3s ease; /* Suaviza el cambio de color */
+}
+
+/* Footer */
+.footer {
+  background: #ffffff;         /* Fondo blanco para el pie de página */
+  border-top: 1px solid #ddd;  /* Línea superior para separación */
+  text-align: center;          /* Centrado del texto */
+  padding: 1rem 0;             /* Espaciado interno vertical */
+}
+
+.footer-text {
+  font-size: 0.9rem;          /* Texto más pequeño para información secundaria */
+  color: #666;                /* Gris suave */
+}
+
+/* Responsividad: ajustes para pantallas pequeñas */
+@media (max-width: 600px) {
+    .landing-img {
+        width: 80%;           /* La imagen ocupa más espacio en pantallas pequeñas */
+        max-width: 100%;      /* Evita que sea más grande que el contenedor */
+    }
+    
+    .text-seasons {
+        font-size: 2rem;      /* Reduce tamaño del título */
+    }
+}
+
+/* Responsividad para pantallas muy pequeñas */
+@media (max-width: 400px) {
+    .text-seasons {
+        font-size: 1.5rem;    /* Nuevo ajuste para mantener legibilidad */
+    }
+}
+
+/* Contenedor del login */
+.login-wrapper {
+  min-height: 60vh;
+}
+
+/* Tarjeta de login */
+.login-form {
+  max-width: 380px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Botón adaptado al estilo global */
+.login-form .btn-lg {
+  background-color: #007bff;
+  border-radius: 5px;
+  font-size: 1.1rem;
+}
